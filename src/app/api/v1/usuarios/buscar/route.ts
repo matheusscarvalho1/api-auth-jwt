@@ -5,7 +5,6 @@ export async function GET () {
   try {
     const user = await getUsers();
 
-    // Verifica se 'user' é um array e se tem elementos
     if (!Array.isArray(user) || user.length === 0) {
       return NextResponse.json({ message: 'Nenhum usuário encontrado.' }, { status: 404 });
     }
