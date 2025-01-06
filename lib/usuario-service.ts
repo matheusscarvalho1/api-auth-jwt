@@ -46,31 +46,30 @@ export async function createUser(name: string, email: string, password: string) 
 export async function getUsers() {
     try {
         const data = await prisma.user.findMany();
-        if(!data) {
-            throw new UserNotFoundError()
+
+        if (!data) {
+          throw new UserNotFoundError();
         }
-        if (data.length === 0) {
-          return { message: "Nenhum usuário encontrado." };
-        }
+
         return data
         
     } catch (error) {
-        console.error(error);
-        throw error
+      console.error('Erro ao buscar usuários:', error);
+      throw error;
     }
 }
 
 export async function getUserById(id: string) {
     try {
-        const user = await prisma.user.findUnique({
+        const data = await prisma.user.findUnique({
           where: { id },
         });
     
-        if (!user) {
-          throw new Error("Usuário não encontrado.");
+        if (!data) {
+          throw new UserNotFoundError();
         }
     
-        return user;
+        return data;
     
       } catch (err) {
         console.error(err);

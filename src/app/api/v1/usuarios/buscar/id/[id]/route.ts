@@ -15,6 +15,7 @@ export async function GET(req: Request) {
 
   try {
     const user = await getUserById(id);
+    
     return NextResponse.json({ message: 'Dados recuperados com sucesso', data: user }, { status: 200 });
   } catch (err) {
     console.error(err);
