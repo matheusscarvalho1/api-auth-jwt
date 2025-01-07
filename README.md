@@ -6,7 +6,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - Docker
 - Prisma
 - Next v15.1.3
-- Jose
+- Jose (JWT)
 
 ## Getting Started
 
