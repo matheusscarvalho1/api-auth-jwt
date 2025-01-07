@@ -1,16 +1,20 @@
 import { NextResponse } from "next/server";
 import { z } from 'zod';
-import jwt from 'jsonwebtoken';
+import { SignJWT } from 'jose';
 import { authenticateUser } from "@/lib/auth-service";
 import { InvalidCredentialsError } from "@/src/app/utils/errors/invalid-credentials-error";
 
-type AuthenticatedUser = {
-  id: string;
-  email: string;
-  name: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
+type JWTPayload = Record<string, unknown>;
+
+async function generateJWT(payload: JWTPayload, expiresIn: string) {
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET_KEY || 'secret');
+
+  
+  return await new SignJWT(payload)
+    .setProtectedHeader({ alg: 'HS256' })
+    .setExpirationTime(expiresIn)
+    .sign(secret); 
+}
 
 export async function POST(req: Request) {
   const schema = z.object({
@@ -21,27 +25,22 @@ export async function POST(req: Request) {
   try {
     const { email, password } = schema.parse(await req.json());
 
-
     const authenticateService = await authenticateUser(email, password);
-
 
     if (!authenticateService || !('id' in authenticateService)) {
       throw new InvalidCredentialsError();
     }
 
-    const { id, email: userEmail } = authenticateService as AuthenticatedUser;
+    const { id, email: userEmail } = authenticateService;
 
-
-    const accessToken = jwt.sign(
+    const accessToken = await generateJWT(
       { userId: id, email: userEmail },
-      process.env.JWT_SECRET || 'secret',
-      { expiresIn: '1h' }
+      '1h'
     );
     
-    const refreshToken = jwt.sign(
+    const refreshToken = await generateJWT(
       { userId: id, email: userEmail },
-      process.env.JWT_SECRET || 'secret',
-      { expiresIn: '7d' }
+      '7d'
     );
 
     return NextResponse.json(
