@@ -47,7 +47,7 @@ export async function getProtectedDataById(id: string) {
                 id: id
             }
         });
-        
+
         return data;
 } catch (err) {
     console.error(err);

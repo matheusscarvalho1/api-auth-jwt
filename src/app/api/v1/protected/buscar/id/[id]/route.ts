@@ -14,9 +14,16 @@ export async function GET(req: Request) {
   }
 
   try {
-    const user = await getProtectedDataById(id);
+    const data = await getProtectedDataById(id);
+
+    if (!data || Object.keys(data).length === 0) {
+        return NextResponse.json(
+          { message: "Dado não encontrado." },
+          { status: 404 }
+        );
+      }
     
-    return NextResponse.json({ message: 'Dados recuperados com sucesso', data: user }, { status: 200 });
+    return NextResponse.json({ message: 'Dados recuperados com sucesso', data: data }, { status: 200 });
   } catch (err) {
     console.error(err);
     return NextResponse.json(
