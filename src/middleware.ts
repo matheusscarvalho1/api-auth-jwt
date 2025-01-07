@@ -29,7 +29,7 @@ export async function middleware(req: NextRequest) {
   }
 
   const authRequiredPaths = [
-    '/api/v1/usuario',
+    '/api/v1/protected',
   ];
 
   const requiresAuth = authRequiredPaths.some(path => req.nextUrl.pathname.startsWith(path));
