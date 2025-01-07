@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { getProtectedData } from "@/lib/protected-route-service";
+import { getUnprotectedData } from "@/lib/unprotected-route-service";
 
 export async function GET () {
   try {
-    const data = await getProtectedData();
+    const data = await getUnprotectedData();
 
     if (!Array.isArray(data) || data.length === 0) {
       return NextResponse.json({ message: 'Nenhum dado encontrado.' }, { status: 404 });

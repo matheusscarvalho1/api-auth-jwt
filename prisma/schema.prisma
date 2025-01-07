@@ -29,7 +29,7 @@ model ProtectedData {
   updatedAt DateTime @updatedAt
 }
 
-model unprotectedData {
+model UnprotectedData {
   id        String   @id @default(uuid())
   data      String
   createdAt DateTime @default(now())

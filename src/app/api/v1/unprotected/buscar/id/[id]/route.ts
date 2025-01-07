@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { deleteProtectedData } from "@/lib/protected-route-service";
+import { getUnprotectedDataById } from "@/lib/unprotected-route-service";
 
-export async function DELETE(req: Request) {
+export async function GET(req: Request) {
 
   const urlParts = req.url.split('/');
   const id = urlParts.pop();
@@ -14,8 +14,9 @@ export async function DELETE(req: Request) {
   }
 
   try {
-    const data = await deleteProtectedData(id);
-    return NextResponse.json({ message: 'Usuário deletado com sucesso', data: data }, { status: 200 });
+    const user = await getUnprotectedDataById(id);
+    
+    return NextResponse.json({ message: 'Dados recuperados com sucesso', data: user }, { status: 200 });
   } catch (err) {
     console.error(err);
     return NextResponse.json(
