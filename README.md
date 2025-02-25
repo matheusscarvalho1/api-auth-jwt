@@ -77,32 +77,33 @@ Crie um arquivo `docker-compose.yml` na raiz do projeto:
 version: '3.8'
 
 services:
-  app:
-    build: .
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/app
-      - /app/node_modules
-    environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/mydatabase
-    depends_on:
-      - db
-
-  db:
+  postgres:
     image: postgres:15
+    container_name: postgres-db
     restart: always
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: project-matheus
+      POSTGRES_PASSWORD: secret
       POSTGRES_DB: mydatabase
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: redis-cache
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
 
 volumes:
-  postgres_data:
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local
 ```
 
 ### ▶️ Rodando a Aplicação com Docker
