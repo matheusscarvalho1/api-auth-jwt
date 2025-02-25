@@ -1,6 +1,7 @@
-# My App
+# APIs básicas de CRUD com rotas protegidas com JWT
 
 Este é um projeto [Next.js](https://nextjs.org) inicializado com [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+- Esse projeto serve como uma base sólida para um sistema mais robusto, seja para um aplicativo web ou mobile, especialmente em aplicações que exigem autenticação segura.
 
 ## 🚀 Tecnologias Utilizadas  
 
@@ -33,7 +34,7 @@ Este é um projeto [Next.js](https://nextjs.org) inicializado com [`create-next-
 
 - **[jose](https://www.npmjs.com/package/jose) `^5.9.6`**  
   - Biblioteca para manipulação de JSON Web Tokens (JWT).  
-  - Permite a criação, assinatura e verificação de tokens de autenticação.  
+  - Permite a criação, assinatura e verificação de tokens de autenticação. 
 
 ### 🐳 **Ambiente e Containerização**  
 
