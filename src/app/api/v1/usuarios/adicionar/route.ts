@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { z } from 'zod';
+import { z } from "zod";
 
 import { createUser } from "@/lib/usuario-service";
 
@@ -11,18 +11,22 @@ export async function POST(req: Request) {
   });
 
   try {
-    const { name, email, password } = schema.parse(await req.json());
-    
+    const body = await req.json();
+    const { name, email, password } = schema.parse(body);
+
     const userResponse = await createUser(name, email, password);
 
-
     if (userResponse.status === 400) {
-      return NextResponse.json({ message: userResponse.message }, { status: 400 });
+      return NextResponse.json(
+        { message: userResponse.message },
+        { status: 400 }
+      );
     }
 
-  
-    return NextResponse.json({ message: 'Usuário cadastrado com sucesso', data: userResponse.user }, { status: 201 });
-
+    return NextResponse.json(
+      { message: "Usuário cadastrado com sucesso", data: userResponse.user },
+      { status: 201 }
+    );
   } catch (err) {
     console.error(err);
     return NextResponse.json(

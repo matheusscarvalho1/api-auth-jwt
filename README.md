@@ -1,6 +1,7 @@
 # APIs básicas de CRUD com rotas protegidas com JWT
 
 Este é um projeto [Next.js](https://nextjs.org) inicializado com [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
 - Esse projeto serve como uma base sólida para um sistema mais robusto, seja para um aplicativo web ou mobile, especialmente em aplicações que exigem autenticação segura.
 
 ## 🚀 Tecnologias Utilizadas  
@@ -94,11 +95,13 @@ services:
 ### ▶️ Rodando a Aplicação com Docker
 
 1. Construa a imagem:
+
    ```sh
    docker-compose build
    ```
 
 2. Inicie os containers:
+
    ```sh
    docker-compose up -d
    ```
@@ -110,6 +113,7 @@ services:
 Após instalar as dependências, configure o Prisma:
 
 1. Crie o arquivo `.env` e defina a string de conexão com o banco de dados (utilize as credenciais do arquivo docker-compose.yml:
+
    ```env
    DATABASE_URL="postgresql://user:password@localhost:5432/mydatabase"
    ```
@@ -128,6 +132,7 @@ O projeto utiliza:
 - **TSX** `^4.19.2` para execução de TypeScript sem compilação manual
 <hr>
 
+
  ## ⚙️ Resultados
  - Usando app router do next, as rotas das APIs são definidas baseada no caminho dos arquivos de definição das regras de negócio:
  
@@ -137,11 +142,13 @@ O projeto utiliza:
  ![image](https://github.com/user-attachments/assets/da34d7e1-da18-479f-a5be-18732c2718d6)
 - Usando o Postman (API Client) é possível testar as APIs criadas para observar se elas estão com o comportamento correto:
   
+
 ![image](https://github.com/user-attachments/assets/6c3490d4-07a8-4a8b-9af1-a6fbdaecdf9e)
 
 <hr>
 
 ### Rotas que não precisam de autenticação
+
 - As rotas que não precisam de autenticação estão nomeadas como 'unprotected data' nela é possível realizar o CRUD padrão de dados (Criar, Ler, Atualizar, Deletar)
 - Os Métodos/Rotas são: POST - '/api/v1/unprotected/adicionar':
 
@@ -149,9 +156,11 @@ O projeto utiliza:
   ![image](https://github.com/user-attachments/assets/22bda20c-04ef-4934-9998-33a4379efd06)
   ![image](https://github.com/user-attachments/assets/4de2f812-7783-4f5d-ad69-c5a719b82c1a)
   <hr>
+
 - GET - '/api/v1/unprotected/buscar':
 
  ![image](https://github.com/user-attachments/assets/679a0aaf-76c1-4e7b-8f94-9af70589cde7)
+
 
 <hr>
 - GET - '/api/v1/unprotected/buscar/id/[id]':
@@ -162,12 +171,14 @@ O projeto utiliza:
 
   ![image](https://github.com/user-attachments/assets/047be076-6872-4abc-874f-fb210d7424ad)
   ![image](https://github.com/user-attachments/assets/01469068-edc0-4145-8f0a-36a3ebbd4468)
+
 <hr>
 
 - DELETE - '/api/v1/unprotected/deketar/id/[id]':
 
   ![image](https://github.com/user-attachments/assets/3384e1d8-8471-42a8-98b1-323d9860af8b)
   ![image](https://github.com/user-attachments/assets/4b8f42ca-5c1b-44c6-bcec-c86a4dcbdadf)
+
 <hr>
 
   ### Rotas que precisam de autenticação
@@ -176,11 +187,14 @@ O projeto utiliza:
 - Os Métodos/Rotas são:  POST - '/api/v1/protected/adicionar':
 ![image](https://github.com/user-attachments/assets/6a549095-09ae-4bdc-b421-40b70c157fe2)
 
+
 <hr>
 
 ### Para conseguir acessar as rotas protegidas será necessário criar um usuário para gerar um token com login e senha
+
 - A rota que cria as credenciais é: POST - '/api/v1/usuarios/adicionar':
  ![image](https://github.com/user-attachments/assets/5a842057-dc58-4d96-8ca9-9ed2f0a2f2ae)
+
 
 <hr>
 
@@ -213,8 +227,3 @@ https://www.linkedin.com/in/matheusscarvalho/
 
 E-mail:
 matheusdocarvalho@gmail.com
-
-
-
-
-
